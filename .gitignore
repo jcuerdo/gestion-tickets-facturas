@@ -1,0 +1,9 @@
+
+<!-- saved from url=(0089)https://raw.githubusercontent.com/manelpm10/Silex-MVC-Example-with-Auth/master/.gitignore -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">cache/*
+log/*
+vendor/*
+public/assets/*
+nbproject/*
+composer.phar
+composer.lock</pre><script type="text/javascript" async="" src="./silex_files/si.js"></script></body></html>
