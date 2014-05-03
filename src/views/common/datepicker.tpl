@@ -1,7 +1,7 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
   <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
+    $( ".datepicker" ).datepicker();
     $.datepicker.regional['es'] = 
     {
         closeText: 'Cerrar',

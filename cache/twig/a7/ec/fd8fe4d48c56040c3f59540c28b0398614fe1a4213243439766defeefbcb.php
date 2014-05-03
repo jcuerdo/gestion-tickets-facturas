@@ -19,7 +19,7 @@ class __TwigTemplate_a7ecfd8fe4d48c56040c3f59540c28b0398614fe1a4213243439766defe
         echo "  <link rel=\"stylesheet\" href=\"http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css\">
   <script>
   \$(function() {
-    \$( \"#datepicker\" ).datepicker();
+    \$( \".datepicker\" ).datepicker();
     \$.datepicker.regional['es'] = 
     {
         closeText: 'Cerrar',
@@ -52,6 +52,6 @@ class __TwigTemplate_a7ecfd8fe4d48c56040c3f59540c28b0398614fe1a4213243439766defe
 
     public function getDebugInfo()
     {
-        return array (  19 => 1,  47 => 10,  42 => 9,  39 => 8,  34 => 5,  31 => 4,  26 => 2,);
+        return array (  19 => 1,  93 => 30,  85 => 28,  80 => 27,  76 => 26,  66 => 19,  60 => 16,  55 => 14,  49 => 11,  45 => 10,  42 => 9,  39 => 8,  34 => 4,  31 => 3,  26 => 2,);
     }
 }

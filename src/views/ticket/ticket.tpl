@@ -6,6 +6,8 @@
 Ticket: {{ticket.id_ticket}}
 Fecha: {{ticket.date | date("d/m/Y")}}
 </h2>
+<div class="row">
+<div class="col-md-6">
 <div class="panel panel-default">
   <div class="panel-heading">Añadir nuevo servicio al ticket</div>
   <div class="panel-body">
@@ -22,28 +24,38 @@ Fecha: {{ticket.date | date("d/m/Y")}}
 	</form>
   </div>
 </div>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Nombre del servicio</th>
-      <th>Precio</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-{% for service in services %}
-      <tr>
-      <td>{{service.name}}</td>
-      <td>{{service.base_price}}</td>
-      <td>
-      <form action="{{path('delete_service')}}">
-			<input type="hidden" name="id_ticket" value="{{ticket.id_ticket}}">
-			<input type="hidden" name="id_ticket_service" value="{{service.id_ticket_service}}">
-			<input type="submit" class="btn btn-default btn-xs" value="Eliminar">
-		</form>
-      </td>
-    </tr>
+</div>
+<div class="col-md-6">
+<div class="panel panel-default">
+  <div class="panel-heading">Servicios</div>
+	  <div class="panel-body">
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th>Nombre del servicio</th>
+		      <th>Precio</th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		{% for service in services %}
+		      <tr>
+		      <td>{{service.name}}</td>
+		      <td>{{service.base_price}}</td>
+		      <td>
+		      <form action="{{path('delete_service')}}">
+					<input type="hidden" name="id_ticket" value="{{ticket.id_ticket}}">
+					<input type="hidden" name="id_ticket_service" value="{{service.id_ticket_service}}">
+					<input type="submit" class="btn btn-default btn-xs" value="Eliminar">
+				</form>
+		      </td>
+		    </tr>
+		  	</tbody>
+		  </div>
+		</div>
+	</div>	
+ </div>
+</div>
 {% endfor %}
 {% endif %}
 

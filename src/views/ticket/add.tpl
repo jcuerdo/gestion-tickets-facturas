@@ -10,7 +10,7 @@
 <form action = "{{path('ticket_create')}}">
     <div class="input-group">
         <span class="input-group-addon">Fecha</span>
-        <input id="datepicker" type="text" name="date" class="form-control" value="{{date}}"/>
+        <input type="text" name="date" class="form-control datepicker" value="{{date | date("d-m-Y")}}"/>
     </div>
     <br/>
     <div class="input-group">

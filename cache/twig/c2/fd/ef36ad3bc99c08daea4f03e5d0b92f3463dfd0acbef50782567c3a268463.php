@@ -42,25 +42,27 @@ Fecha: ";
             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "ticket"), "date"), "d/m/Y"), "html", null, true);
             echo "
 </h2>
+<div class=\"row\">
+<div class=\"col-md-6\">
 <div class=\"panel panel-default\">
   <div class=\"panel-heading\">Añadir nuevo servicio al ticket</div>
   <div class=\"panel-body\">
     <form action=\"";
-            // line 12
+            // line 14
             echo $this->env->getExtension('routing')->getPath("service_create");
             echo "\">
 \t\t<div class=\"input-group\">
 \t\t\t<input type=\"hidden\" name=\"id_ticket\" value=\"";
-            // line 14
+            // line 16
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "ticket"), "id_ticket"), "html", null, true);
             echo "\">
 \t\t\t<select class=\"form-control\" name='id_service'>
 \t\t\t\t";
-            // line 16
+            // line 18
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable($this->getContext($context, "services_list"));
             foreach ($context['_seq'] as $context["_key"] => $context["service_option"]) {
-                // line 17
+                // line 19
                 echo "\t\t\t\t<option  value=\"";
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "service_option"), "id_service"), "html", null, true);
                 echo "\">";
@@ -71,62 +73,72 @@ Fecha: ";
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['service_option'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 19
+            // line 21
             echo "\t\t\t</select>
 \t\t</div>
 \t\t<input type=\"submit\" class=\"btn btn-default btn-lg\" value=\"Añadir Servicio\">
 \t</form>
   </div>
 </div>
-
-<table class=\"table table-striped\">
-  <thead>
-    <tr>
-      <th>Nombre del servicio</th>
-      <th>Precio</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-";
-            // line 35
+</div>
+<div class=\"col-md-6\">
+<div class=\"panel panel-default\">
+  <div class=\"panel-heading\">Servicios</div>
+\t  <div class=\"panel-body\">
+\t\t<table class=\"table table-striped\">
+\t\t  <thead>
+\t\t    <tr>
+\t\t      <th>Nombre del servicio</th>
+\t\t      <th>Precio</th>
+\t\t      <th></th>
+\t\t    </tr>
+\t\t  </thead>
+\t\t  <tbody>
+\t\t";
+            // line 41
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable($this->getContext($context, "services"));
             foreach ($context['_seq'] as $context["_key"] => $context["service"]) {
-                // line 36
-                echo "      <tr>
-      <td>";
-                // line 37
+                // line 42
+                echo "\t\t      <tr>
+\t\t      <td>";
+                // line 43
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "service"), "name"), "html", null, true);
                 echo "</td>
-      <td>";
-                // line 38
+\t\t      <td>";
+                // line 44
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "service"), "base_price"), "html", null, true);
                 echo "</td>
-      <td>
-      <form action=\"";
-                // line 40
+\t\t      <td>
+\t\t      <form action=\"";
+                // line 46
                 echo $this->env->getExtension('routing')->getPath("delete_service");
                 echo "\">
-\t\t\t<input type=\"hidden\" name=\"id_ticket\" value=\"";
-                // line 41
+\t\t\t\t\t<input type=\"hidden\" name=\"id_ticket\" value=\"";
+                // line 47
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "ticket"), "id_ticket"), "html", null, true);
                 echo "\">
-\t\t\t<input type=\"hidden\" name=\"id_ticket_service\" value=\"";
-                // line 42
+\t\t\t\t\t<input type=\"hidden\" name=\"id_ticket_service\" value=\"";
+                // line 48
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "service"), "id_ticket_service"), "html", null, true);
                 echo "\">
-\t\t\t<input type=\"submit\" class=\"btn btn-default btn-xs\" value=\"Eliminar\">
-\t\t</form>
-      </td>
-    </tr>
+\t\t\t\t\t<input type=\"submit\" class=\"btn btn-default btn-xs\" value=\"Eliminar\">
+\t\t\t\t</form>
+\t\t      </td>
+\t\t    </tr>
+\t\t  \t</tbody>
+\t\t  </div>
+\t\t</div>
+\t</div>\t
+ </div>
+</div>
 ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['service'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
         }
-        // line 49
+        // line 61
         echo "
 ";
     }
@@ -143,6 +155,6 @@ Fecha: ";
 
     public function getDebugInfo()
     {
-        return array (  130 => 49,  117 => 42,  113 => 41,  109 => 40,  104 => 38,  100 => 37,  97 => 36,  93 => 35,  75 => 19,  64 => 17,  60 => 16,  55 => 14,  50 => 12,  42 => 7,  38 => 6,  35 => 5,  33 => 4,  30 => 3,  25 => 2,);
+        return array (  142 => 61,  123 => 48,  119 => 47,  115 => 46,  110 => 44,  106 => 43,  103 => 42,  99 => 41,  77 => 21,  66 => 19,  62 => 18,  57 => 16,  52 => 14,  42 => 7,  38 => 6,  35 => 5,  33 => 4,  30 => 3,  25 => 2,);
     }
 }

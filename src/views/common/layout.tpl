@@ -51,6 +51,7 @@
 			</li>
 			<li {% if 'ticket_add' == active %}class="active"{% endif %}><a href="{{ path('ticket_add') }}">Nuevo ticket</a></li>
 			<li {% if 'tickets_show' == active %}class="active"{% endif %}><a href="{{ path('tickets_show') }}">Ver Tickets</a></li>
+			<li {% if 'tickets_report' == active %}class="active"{% endif %}><a href="{{ path('tickets_report') }}">Generar facturas</a></li>
           </ul>
         </div>
       </div>
@@ -64,6 +65,7 @@
 			</li>
 			<li {% if 'ticket_add' == active %}class="active"{% endif %}><a href="{{ path('ticket_add') }}">Nuevo ticket</a></li>
 			<li {% if 'tickets_show' == active %}class="active"{% endif %}><a href="{{ path('tickets_show') }}">Ver Tickets</a></li>
+			<li {% if 'tickets_report' == active %}class="active"{% endif %}><a href="{{ path('tickets_report') }}">Generar facturas</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -79,7 +81,8 @@
               <h4><a href="{{ path('tickets_show') }}">Ver tickets</a></h4>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-
+              <span class="glyphicon glyphicon-th-list"></span>
+              <h4><a href="{{ path('tickets_report') }}">Generar facturas</a></h4>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
 

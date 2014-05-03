@@ -161,5 +161,49 @@ SQL;
 			$stmt = $this->db->executeQuery( $sql_deleteRelatedServices, array( $id_ticket ) );
 			$this->db->commit();
 		}
+
+		public function getTicketReport( $start_date, $end_date, $id_shop, $iva )
+		{
+
+			$sql = <<<SQL
+SELECT
+	t.date,
+	t.id_ticket,
+	s.name,
+	s.base_price
+FROM
+	`service` s
+	INNER JOIN `ticket_service` ts
+	USING( id_service ) 
+	INNER JOIN  `ticket` t
+	USING( id_ticket )
+WHERE
+	t.date >= ? AND 
+	t.date <= ? AND
+	t.id_shop = ?
+ORDER BY 
+	t.date ASC,
+	t.id_ticket ASC
+SQL;
+
+			$stmt = $this->db->executeQuery( $sql, array( $start_date, $end_date, $id_shop ) );
+
+			if ( !$services = $stmt->fetchAll() )
+			{
+				return array();
+			}
+
+			$base_total = 0;
+			foreach( $services as $service )
+			{
+				$base_total += $service['base_price']; 
+				$service['price'] = $service['base_price'] * ( ( $iva / 100 ) + 1 ); 
+			    $report['tickets'][$service['id_ticket']]['services'][] = $service;
+			    $report['tickets'][$service['id_ticket']]['date'] = $service['date'];
+			}
+				$report['base_total'] = $base_total;
+				$report['total'] = $base_total * ( ( $iva / 100 ) + 1 );
+			return $report;
+		}
 }
 }

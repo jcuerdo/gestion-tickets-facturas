@@ -100,6 +100,14 @@ class __TwigTemplate_8e50e7e8f93a00081135e2b364f70955d9123dbdebf13cbc9a5a040c9f1
         echo "><a href=\"";
         echo $this->env->getExtension('routing')->getPath("tickets_show");
         echo "\">Ver Tickets</a></li>
+\t\t\t<li ";
+        // line 54
+        if (("tickets_report" == $this->getContext($context, "active"))) {
+            echo "class=\"active\"";
+        }
+        echo "><a href=\"";
+        echo $this->env->getExtension('routing')->getPath("tickets_report");
+        echo "\">Generar facturas</a></li>
           </ul>
         </div>
       </div>
@@ -110,7 +118,7 @@ class __TwigTemplate_8e50e7e8f93a00081135e2b364f70955d9123dbdebf13cbc9a5a040c9f1
         <div class=\"col-sm-3 col-md-2 sidebar\">
           <ul class=\"nav nav-sidebar\">
 \t        <li ";
-        // line 63
+        // line 64
         if (("homepage" == $this->getContext($context, "active"))) {
             echo "class=\"active\"";
         }
@@ -119,7 +127,7 @@ class __TwigTemplate_8e50e7e8f93a00081135e2b364f70955d9123dbdebf13cbc9a5a040c9f1
         echo "\">Inicio</a></li>
 \t\t\t</li>
 \t\t\t<li ";
-        // line 65
+        // line 66
         if (("ticket_add" == $this->getContext($context, "active"))) {
             echo "class=\"active\"";
         }
@@ -127,13 +135,21 @@ class __TwigTemplate_8e50e7e8f93a00081135e2b364f70955d9123dbdebf13cbc9a5a040c9f1
         echo $this->env->getExtension('routing')->getPath("ticket_add");
         echo "\">Nuevo ticket</a></li>
 \t\t\t<li ";
-        // line 66
+        // line 67
         if (("tickets_show" == $this->getContext($context, "active"))) {
             echo "class=\"active\"";
         }
         echo "><a href=\"";
         echo $this->env->getExtension('routing')->getPath("tickets_show");
         echo "\">Ver Tickets</a></li>
+\t\t\t<li ";
+        // line 68
+        if (("tickets_report" == $this->getContext($context, "active"))) {
+            echo "class=\"active\"";
+        }
+        echo "><a href=\"";
+        echo $this->env->getExtension('routing')->getPath("tickets_report");
+        echo "\">Generar facturas</a></li>
           </ul>
         </div>
         <div class=\"col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main\">
@@ -143,19 +159,23 @@ class __TwigTemplate_8e50e7e8f93a00081135e2b364f70955d9123dbdebf13cbc9a5a040c9f1
             <div class=\"col-xs-6 col-sm-3 placeholder\">
               <span class=\"glyphicon glyphicon-plus\"></span>
               <h4><a href=\"";
-        // line 75
+        // line 77
         echo $this->env->getExtension('routing')->getPath("ticket_add");
         echo "\">Nuevo ticket</a></h4>
             </div>
             <div class=\"col-xs-6 col-sm-3 placeholder\">
               <span class=\"glyphicon glyphicon-th-list\"></span>
               <h4><a href=\"";
-        // line 79
+        // line 81
         echo $this->env->getExtension('routing')->getPath("tickets_show");
         echo "\">Ver tickets</a></h4>
             </div>
             <div class=\"col-xs-6 col-sm-3 placeholder\">
-
+              <span class=\"glyphicon glyphicon-th-list\"></span>
+              <h4><a href=\"";
+        // line 85
+        echo $this->env->getExtension('routing')->getPath("tickets_report");
+        echo "\">Generar facturas</a></h4>
             </div>
             <div class=\"col-xs-6 col-sm-3 placeholder\">
 
@@ -163,9 +183,9 @@ class __TwigTemplate_8e50e7e8f93a00081135e2b364f70955d9123dbdebf13cbc9a5a040c9f1
           </div>
           <div class=\"table-responsive\">
          \t";
-        // line 89
+        // line 92
         $this->displayBlock('content', $context, $blocks);
-        // line 91
+        // line 94
         echo "          </div>
         </div>
       </div>
@@ -181,10 +201,10 @@ class __TwigTemplate_8e50e7e8f93a00081135e2b364f70955d9123dbdebf13cbc9a5a040c9f1
         echo "\t";
     }
 
-    // line 89
+    // line 92
     public function block_content($context, array $blocks = array())
     {
-        // line 90
+        // line 93
         echo "\t\t\t";
     }
 
@@ -200,6 +220,6 @@ class __TwigTemplate_8e50e7e8f93a00081135e2b364f70955d9123dbdebf13cbc9a5a040c9f1
 
     public function getDebugInfo()
     {
-        return array (  188 => 90,  185 => 89,  181 => 25,  178 => 24,  169 => 91,  167 => 89,  154 => 79,  147 => 75,  131 => 66,  123 => 65,  114 => 63,  97 => 53,  89 => 52,  80 => 50,  65 => 37,  63 => 36,  51 => 26,  49 => 24,  30 => 8,  21 => 1,);
+        return array (  208 => 93,  205 => 92,  201 => 25,  198 => 24,  189 => 94,  187 => 92,  177 => 85,  170 => 81,  163 => 77,  147 => 68,  139 => 67,  131 => 66,  122 => 64,  105 => 54,  97 => 53,  89 => 52,  80 => 50,  65 => 37,  63 => 36,  51 => 26,  49 => 24,  30 => 8,  21 => 1,);
     }
 }

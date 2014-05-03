@@ -46,9 +46,9 @@ class __TwigTemplate_ada9b79684137f1c964246b294eba17bd2a18c651602b0d334a18113fd9
         echo "\">
     <div class=\"input-group\">
         <span class=\"input-group-addon\">Fecha</span>
-        <input id=\"datepicker\" type=\"text\" name=\"date\" class=\"form-control\" value=\"";
+        <input type=\"text\" name=\"date\" class=\"form-control datepicker\" value=\"";
         // line 13
-        echo twig_escape_filter($this->env, $this->getContext($context, "date"), "html", null, true);
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getContext($context, "date"), "d-m-Y"), "html", null, true);
         echo "\"/>
     </div>
     <br/>

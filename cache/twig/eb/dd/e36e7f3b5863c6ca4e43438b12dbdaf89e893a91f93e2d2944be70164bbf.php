@@ -51,9 +51,9 @@ Fecha: ";
         echo $this->env->getExtension('routing')->getPath("tickets_show");
         echo "\">
     <div class=\"input-group\">
-        <span class=\"input-group-addon\">Fecha</span><input id=\"datepicker\" class=\"form-control\" type=\"text\" name=\"date\" value=\"";
+        <span class=\"input-group-addon\">Fecha</span><input  class=\"form-control datepicker\" type=\"text\" name=\"date\" value=\"";
         // line 15
-        echo twig_escape_filter($this->env, $this->getContext($context, "date"), "html", null, true);
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getContext($context, "date"), "d-m-Y"), "html", null, true);
         echo "\"/>
      </div>
      <br/>

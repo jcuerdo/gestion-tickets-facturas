@@ -12,7 +12,7 @@ Fecha: {{date | date("d/m/Y")}}
 
 <form action = "{{path('tickets_show')}}">
     <div class="input-group">
-        <span class="input-group-addon">Fecha</span><input id="datepicker" class="form-control" type="text" name="date" value="{{date}}"/>
+        <span class="input-group-addon">Fecha</span><input  class="form-control datepicker" type="text" name="date" value="{{date | date("d-m-Y")}}"/>
      </div>
      <br/>
      <input type="submit" class="btn btn-default btn-lg" value="Cambiar Fecha"/>

@@ -4,22 +4,24 @@ namespace Controller
 	use Silex\Application;
 	use Silex\ControllerProviderInterface;
 	use Model\TicketModel;
+	use Model\ShopModel;
 
 	class TicketController implements ControllerProviderInterface
 	{
 		public function connect( Application $app )
 		{
-			$indexController = $app['controllers_factory'];
-			$indexController->get("/", array( $this, 'showAll' ) )->bind( 'tickets_show' );
-			$indexController->get("/add", array( $this, 'add' ) )->bind( 'ticket_add' );
-			$indexController->get("/create", array( $this, 'create' ) )->bind( 'ticket_create' );
-			$indexController->get("/delete/{id_ticket}", array( $this, 'delete' ) )->bind( 'ticket_delete' );
-			$indexController->get("/ticket/{id_ticket}", array( $this, 'show' ) )->bind( 'ticket_show' )->assert( 'id_ticket', '[0-9]+') ;
+			$ticketController = $app['controllers_factory'];
+			$ticketController->get("/", array( $this, 'showAll' ) )->bind( 'tickets_show' );
+			$ticketController->get("/add", array( $this, 'add' ) )->bind( 'ticket_add' );
+			$ticketController->get("/create", array( $this, 'create' ) )->bind( 'ticket_create' );
+			$ticketController->get("/delete/{id_ticket}", array( $this, 'delete' ) )->bind( 'ticket_delete' );
+			$ticketController->get("/ticket/{id_ticket}", array( $this, 'show' ) )->bind( 'ticket_show' )->assert( 'id_ticket', '[0-9]+') ;
+			$ticketController->get("/report", array( $this, 'getTicketReport' ) )->bind( 'tickets_report' );
 
-			$indexController->get("/createservice", array( $this, 'createService' ) )->bind( 'service_create' );
-			$indexController->get("/deleteservice", array( $this, 'deleteService' ) )->bind( 'delete_service' );
+			$ticketController->get("/createservice", array( $this, 'createService' ) )->bind( 'service_create' );
+			$ticketController->get("/deleteservice", array( $this, 'deleteService' ) )->bind( 'delete_service' );
 
-			return $indexController;
+			return $ticketController;
 		}
 
 		public function add( Application $app )
@@ -90,6 +92,46 @@ namespace Controller
 			$ticket_model->createTicketService( $id_ticket, $id_service );
 
 			return $app->redirect( "ticket/$id_ticket" );
+		}
+
+		public function getTicketReport( Application $app )
+		{
+			$ticket_model =  new TicketModel( $app['db'] );
+			$shop_model =  new ShopModel( $app['db'] );
+			
+			$start_date = $app['request']->get( 'start_date' );
+			$start_date = $start_date != null ? $start_date : date('d-m-Y');
+			$timestamp = strtotime( $start_date );
+			$start_date = date("Y-m-d", $timestamp);
+			
+			$end_date = $app['request']->get( 'end_date' );
+			$end_date = $end_date != null ? $end_date : date('d-m-Y');
+			$timestamp = strtotime( $end_date );
+			$end_date = date("Y-m-d", $timestamp);
+			
+			$report = $ticket_model->getTicketReport( $start_date, $end_date, $app['id_shop'], $app['iva'] );
+			$shop = $shop_model->getShop( $app['id_shop'] );
+
+			$version = $app['request']->get( 'version' );
+			$tpl = 'ticket/report';
+			if( 'print' == $version )
+			{
+				$tpl .= '_print.tpl';
+			}
+			else
+			{
+				$tpl.= '.tpl';
+			}
+
+			return $app['twig']->render( $tpl, 
+				array( 
+					'report' => $report, 
+					'start_date' => $start_date, 
+					'end_date' => $end_date,
+					'iva' => $app['iva'],
+					'shop' => $shop
+					) 
+				);
 		}
 	}
 }
