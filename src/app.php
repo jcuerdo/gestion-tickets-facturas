@@ -22,10 +22,25 @@ $app->register(new UrlGeneratorServiceProvider());
 // Security definition.
 $app->register(new SecurityServiceProvider(), array(
 	'security.firewalls' => array(
+		// Login URL is open to everybody.
+		'login' => array(
+			'pattern' => '^/user/login$',
+			'anonymous' => true,
+		),
 		// Any other URL requires auth.
 		'site' => array(
 			'pattern' => '^/.*$',
-			'anonymous' => true,
+			'form'	=> array(
+				'login_path'		 => '/user/login',
+				'username_parameter' => 'form[username]',
+				'password_parameter' => 'form[password]',
+			),
+			'anonymous' => false,
+			'logout'	=> array('logout_path' => '/user/logout'),
+			'users' => $app->share( function () use ( $app )
+			{
+				return new Model\UserProvider( $app );
+			} ),
 		),
 	),
 ));
@@ -91,7 +106,22 @@ if (isset($app['assetic.enabled']) && $app['assetic.enabled']) {
 	));
 }
 
+//Error pages
+$app->error(function (\Exception $e, $code) use($app) {
+    switch ($code) {
+        case 404:
+            $message = $app['twig']->render('error/404.tpl');
+            break;
+        default:
+            $message = $app['twig']->render('error/default.tpl');
+    }
+
+    return new Symfony\Component\HttpFoundation\Response($message, $code);
+});
+
 $app->register(new Silex\Provider\DoctrineServiceProvider());
+
+$app['id_shop'] = $app['session']->get('id_shop');
 
 require PATH_SRC . '/routes.php';
 

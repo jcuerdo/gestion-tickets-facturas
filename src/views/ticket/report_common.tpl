@@ -1,7 +1,9 @@
+{% if report %}
+{% if report.tickets %}
 {% for id_ticket,ticket in report.tickets %}
     <h3>
     ID Ticket : {{ id_ticket }}
-    Fecha Ticket : {{ ticket.date }}
+    Fecha Ticket : {{ ticket.date | date("d/m/Y") }}
     </h3>
     <table class="table table-striped">
       <thead>
@@ -16,11 +18,11 @@
       <tbody>
     {% for service in ticket.services %}
       <tr>
-        <td>{{ service.date }}</td>
+        <td>{{ service.date | date("d/m/Y") }}</td>
         <td>{{ service.name }}</td>
-        <td>{{ service.base_price }}€</td>
+        <td>{{ service.base_price | number_format( 2, ',', '.' ) }}€</td>
         <td>{{ iva }}%</td>
-        <td>{{ service.price }}€</td>
+        <td>{{ service.price | number_format( 2, ',', '.' ) }}€</td>
       </tr>
     {% endfor %}
   </tbody>
@@ -31,7 +33,7 @@
   <div class="col-md-4">
     <div class="panel panel-default">
     <div class="panel-body">
-          <strong>Precio base total:</strong> {{report.base_total}}€
+          <strong>Precio base total:</strong> {{report.base_total | number_format( 2, ',', '.' ) }}€
   </div>
 </div>
   </div>
@@ -45,8 +47,10 @@
   <div class="col-md-4">
         <div class="panel panel-default">
     <div class="panel-body">
-          <strong>Precio total:</strong> {{report.total}}€
+          <strong>Precio total:</strong> {{report.total | number_format( 2, ',', '.' ) }}€
   </div>
 </div>
   </div>
 </div>
+{% endif %}
+{% endif %}

@@ -16,7 +16,7 @@ Fecha: {{ticket.date | date("d/m/Y")}}
 			<input type="hidden" name="id_ticket" value="{{ticket.id_ticket}}">
 			<select class="form-control" name='id_service'>
 				{% for service_option in services_list %}
-				<option  value="{{service_option.id_service}}">{{service_option.name}}</option>
+				<option  value="{{service_option.id_service}}">{{service_option.name}} ( {{service_option.price  | number_format( 2, ',', '.' ) }}€ )</option>
 				{% endfor %}
 			</select>
 		</div>
@@ -41,7 +41,7 @@ Fecha: {{ticket.date | date("d/m/Y")}}
 		{% for service in services %}
 		      <tr>
 		      <td>{{service.name}}</td>
-		      <td>{{service.base_price}}</td>
+		      <td>{{service.price | number_format( 2, ',', '.' ) }}</td>
 		      <td>
 		      <form action="{{path('delete_service')}}">
 					<input type="hidden" name="id_ticket" value="{{ticket.id_ticket}}">

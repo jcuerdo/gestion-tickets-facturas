@@ -90,6 +90,10 @@ SQL;
 				return array();
 			}
 
+			foreach ( $services as $key => $value) {
+				$services[$key]['price'] = $value['base_price'] * ( ( $this->app['iva'] / 100 ) + 1 );
+			}
+
 			return $services;
 		}
 
@@ -109,26 +113,6 @@ SQL;
 			}
 
 			return $this->db->lastInsertId();
-		}
-
-		public function getServices()
-		{
-
-			$sql = <<<SQL
-SELECT
-	*
-FROM
-	`service`
-LIMIT 100;
-SQL;
-
-			$stmt = $this->db->executeQuery( $sql, array() );
-
-			if ( !$services = $stmt->fetchAll() )
-			{
-				return array();
-			}
-			return $services;
 		}
 
 		public function deleteService( $id_ticket_service )

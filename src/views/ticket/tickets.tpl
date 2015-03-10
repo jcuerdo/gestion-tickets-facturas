@@ -31,7 +31,7 @@ Fecha: {{date | date("d/m/Y")}}
 {% for ticket in tickets %}
                   <tr>
                   <td>{{ticket.id_ticket}}</td>
-                  <td>{{ticket.date}}</td>
+                  <td>{{ticket.date | date("d/m/Y")}}</td>
                   <td><a class="btn btn-default btn-xs" href="{{path('ticket_show',{id_ticket:ticket.id_ticket})}}">Ver ticket</a></td>
                   <td><a class="btn btn-default btn-xs" href="{{path('ticket_delete',{id_ticket:ticket.id_ticket})}}">Eliminar ticket</a></td>
                 </tr>

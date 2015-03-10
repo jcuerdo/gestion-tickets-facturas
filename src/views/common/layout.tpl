@@ -18,8 +18,8 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-    <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
 
 	{% block header %}
 	{% endblock %}
@@ -52,6 +52,9 @@
 			<li {% if 'ticket_add' == active %}class="active"{% endif %}><a href="{{ path('ticket_add') }}">Nuevo ticket</a></li>
 			<li {% if 'tickets_show' == active %}class="active"{% endif %}><a href="{{ path('tickets_show') }}">Ver Tickets</a></li>
 			<li {% if 'tickets_report' == active %}class="active"{% endif %}><a href="{{ path('tickets_report') }}">Generar facturas</a></li>
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+      <li {% if 'account' == active %}class="active"{% endif %}><a href="{{ path('logout') }}">{{ 'Cerrar Sesión'|trans }}</a></li>
+      {% endif %}
           </ul>
         </div>
       </div>
@@ -81,11 +84,12 @@
               <h4><a href="{{ path('tickets_show') }}">Ver tickets</a></h4>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <span class="glyphicon glyphicon-th-list"></span>
+              <span class="glyphicon glyphicon-print"></span>
               <h4><a href="{{ path('tickets_report') }}">Generar facturas</a></h4>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-
+              <span class="glyphicon glyphicon-hand-up"></span>
+              <h4><a href="{{ path('services_show') }}">Administrar Servicios</a></h4>
             </div>
           </div>
           <div class="table-responsive">

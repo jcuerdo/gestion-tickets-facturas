@@ -4,6 +4,7 @@ namespace Controller
 	use Silex\Application;
 	use Silex\ControllerProviderInterface;
 	use Model\TicketModel;
+	use Model\ServiceModel;
 	use Model\ShopModel;
 
 	class TicketController implements ControllerProviderInterface
@@ -32,7 +33,7 @@ namespace Controller
 
 		public function create( Application $app )
 		{	
-			$ticket_model =  new TicketModel( $app['db'] );
+			$ticket_model =  new TicketModel( $app );
 			$id_shop = $app['id_shop'];
 			$date = $app['request']->get( 'date' );
 			$timestamp = strtotime( $date );
@@ -44,10 +45,11 @@ namespace Controller
 
 		public function show( Application $app )
 		{
-			$ticket_model =  new TicketModel( $app['db'] );
+			$ticket_model =  new TicketModel( $app );
+			$service_model =  new ServiceModel( $app );
 			$id = $app['request']->get( 'id_ticket' );
 			$ticket = $ticket_model->getTicketById( $id );
-			$services_list = $ticket_model->getServices();
+			$services_list = $service_model->getServices();
 			$services = $ticket_model->getTicketServicesByIdTicket( $id );
 
 			return $app['twig']->render( 'ticket/ticket.tpl', array( 'ticket' => $ticket, 'services' => $services, 'services_list' => $services_list ) );
@@ -55,7 +57,7 @@ namespace Controller
 
 		public function showAll( Application $app )
 		{
-			$ticket_model =  new TicketModel( $app['db'] );
+			$ticket_model =  new TicketModel( $app );
 			$date = $app['request']->get( 'date' );
 			$date = $date != null ? $date : date('d-m-Y');
 			$timestamp = strtotime( $date );
@@ -67,7 +69,7 @@ namespace Controller
 
 		public function delete( Application $app )
 		{
-			$ticket_model =  new TicketModel( $app['db'] );
+			$ticket_model =  new TicketModel( $app );
 			$id_ticket = $app['request']->get( 'id_ticket' );
 			$ticket_model->deleteTicket( $id_ticket );
 
@@ -76,7 +78,7 @@ namespace Controller
 
 		public function deleteService( Application $app )
 		{
-			$ticket_model =  new TicketModel( $app['db'] );
+			$ticket_model =  new TicketModel( $app );
 			$id_ticket = $app['request']->get( 'id_ticket' );
 			$id_ticket_service = $app['request']->get( 'id_ticket_service' );
 			$ticket_model->deleteService( $id_ticket_service );
@@ -86,7 +88,7 @@ namespace Controller
 
 		public function createService( Application $app )
 		{
-			$ticket_model =  new TicketModel( $app['db'] );
+			$ticket_model =  new TicketModel( $app );
 			$id_ticket = $app['request']->get( 'id_ticket' );
 			$id_service = $app['request']->get( 'id_service' );
 			$ticket_model->createTicketService( $id_ticket, $id_service );
@@ -96,8 +98,8 @@ namespace Controller
 
 		public function getTicketReport( Application $app )
 		{
-			$ticket_model =  new TicketModel( $app['db'] );
-			$shop_model =  new ShopModel( $app['db'] );
+			$ticket_model =  new TicketModel( $app );
+			$shop_model =  new ShopModel( $app );
 			
 			$start_date = $app['request']->get( 'start_date' );
 			$start_date = $start_date != null ? $start_date : date('d-m-Y');

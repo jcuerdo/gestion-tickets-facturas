@@ -6,7 +6,7 @@ $app['session.default_locale'] = $app['locale'];
 $app['translator.messages'] = array(
 	'es' => PATH_LOCALES . '/es.yml',
 );
-$app['id_shop'] = 1;
+
 $app['iva'] = 21;
 
 // Cache
