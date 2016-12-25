@@ -34,10 +34,11 @@ $app['assetic.output.path_to_js']		= 'js/scripts.js';
 // Doctrine (db).
 $app['db.options'] = array(
 	'driver'	=> 'pdo_mysql',
-	'host'		=> 'localhost',
-	'dbname'	=> 'peluqueria',
-	'user'		=> 'root',
-	'password'	=> 'Soypr098.',
+    'host'          =>  getenv('OPENSHIFT_MYSQL_DB_HOST'),
+    'port'          =>  getenv('OPENSHIFT_MYSQL_DB_PORT'),
+    'dbname'          =>  getenv('OPENSHIFT_APP_NAME'),
+    'user'          =>  getenv('OPENSHIFT_MYSQL_DB_USERNAME'),
+    'password'	=>  getenv('OPENSHIFT_MYSQL_DB_PASSWORD'),
     'charset'   => 'utf8',
     'driverOptions' => array(
         1002=>'SET NAMES utf8'
