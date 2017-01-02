@@ -1,1 +1,2 @@
+composer self-update
 composer install
