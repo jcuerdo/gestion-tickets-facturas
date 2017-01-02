@@ -115,25 +115,91 @@ namespace Controller
 			$shop = $shop_model->getShop( $app['id_shop'] );
 
 			$version = $app['request']->get( 'version' );
-			$tpl = 'ticket/report';
+
 			if( 'print' == $version )
 			{
-				$tpl .= '_print.tpl';
+                $rendered = $this->getPrintVersion($app, $report, $start_date, $end_date, $shop);
+
+                return $rendered;
 			}
+            else if( 'email' == $version )
+            {
+                $email = $app['request']->get( 'email' );
+                $emailSent = mail(
+                    $email,
+                    sprintf('Tickets desde %s hasta %s de ', $start_date, $end_date),
+                    $this->getPrintVersion($app, $report, $start_date, $end_date, $shop)
+            );
+                if($emailSent){
+                    $app['session']->getFlashBag()->add('success', "Se ha enviado correctamente el reporte a $email");
+                }else{
+                    $app['session']->getFlashBag()->add('error', "No se ha podido enviar el reporte a $email");
+                }
+
+
+                $rendered = $this->getHtmlVersion($app, $report, $start_date, $end_date, $shop);
+
+                return $rendered;
+            }
 			else
 			{
-				$tpl.= '.tpl';
-			}
+                $rendered = $this->getHtmlVersion($app, $report, $start_date, $end_date, $shop);
 
-			return $app['twig']->render( $tpl, 
-				array( 
-					'report' => $report, 
-					'start_date' => $start_date, 
-					'end_date' => $end_date,
-					'iva' => $app['iva'],
-					'shop' => $shop
-					) 
-				);
+                return $rendered;
+            }
 		}
-	}
+
+        /**
+         * @param Application $app
+         * @param $tpl
+         * @param $report
+         * @param $start_date
+         * @param $end_date
+         * @param $shop
+         * @return mixed
+         */
+        private function renderTicketReport(Application $app, $tpl, $report, $start_date, $end_date, $shop)
+        {
+            $rendered = $app['twig']->render($tpl,
+                array(
+                    'report' => $report,
+                    'start_date' => $start_date,
+                    'end_date' => $end_date,
+                    'iva' => $app['iva'],
+                    'shop' => $shop
+                )
+            );
+            return $rendered;
+        }
+
+        /**
+         * @param Application $app
+         * @param $report
+         * @param $start_date
+         * @param $end_date
+         * @param $shop
+         * @return mixed
+         */
+        private function getPrintVersion(Application $app, $report, $start_date, $end_date, $shop)
+        {
+            $tpl = 'ticket/report_print.tpl';
+            $rendered = $this->renderTicketReport($app, $tpl, $report, $start_date, $end_date, $shop);
+            return $rendered;
+        }
+
+        /**
+         * @param Application $app
+         * @param $report
+         * @param $start_date
+         * @param $end_date
+         * @param $shop
+         * @return mixed
+         */
+        private function getHtmlVersion(Application $app, $report, $start_date, $end_date, $shop)
+        {
+            $tpl = 'ticket/report.tpl';
+            $rendered = $this->renderTicketReport($app, $tpl, $report, $start_date, $end_date, $shop);
+            return $rendered;
+        }
+    }
 }

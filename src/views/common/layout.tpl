@@ -93,6 +93,21 @@
             </div>
           </div>
           <div class="table-responsive">
+              {% for error in app.session.flashbag.get('error') %}
+              <div class="error-message">
+                  <div class="alert alert-danger">
+                      {{error}}
+                  </div>
+              </div>
+              {% endfor %}
+
+              {% for success in app.session.flashbag.get('success') %}
+              <div class="error-message">
+                  <div class="alert alert-success">
+                      {{success}}
+                  </div>
+              </div>
+              {% endfor %}
          	{% block content %}
 			{% endblock %}
           </div>

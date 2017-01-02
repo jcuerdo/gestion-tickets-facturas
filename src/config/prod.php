@@ -45,7 +45,9 @@ $app['db.options'] = array(
     )
 );
 
+$app->register(new Silex\Provider\SessionServiceProvider());
+
 // User.
 //$app['security.users'] = array( 'kailash' => array( 'ROLE_USER', 'password' ) );
 
-$app['debug'] = true;
+$app['debug'] = false;
