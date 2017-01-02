@@ -124,14 +124,14 @@ namespace Controller
 			}
             else if( 'email' == $version )
             {
-                var_dump($shop);die;
                 $email = $app['request']->get( 'email' );
                 $headers = "From: " . strip_tags($shop['email']) . "\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
-                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8\r\n";
+
                 $emailSent = mail(
                     $email,
-                    sprintf('Tickets desde %s hasta %s de %s ', $start_date, $end_date, $shop['name']),
+                    sprintf('Tickets desde %s hasta %s de %s ', $start_date, $end_date, strip_tags($shop['name'])),
                     $this->getPrintVersion($app, $report, $start_date, $end_date, $shop),
                     $headers
             );
