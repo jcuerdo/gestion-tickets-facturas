@@ -125,13 +125,13 @@ namespace Controller
             else if( 'email' == $version )
             {
                 $email = $app['request']->get( 'email' );
-                $headers = "From: \r\n";
+                $headers = "From: <info@peluqueria-carmen.es>\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8\r\n";
 
                 $emailSent = mail(
                     $email,
-                    sprintf('Tickets desde %s hasta %s', $start_date, $end_date),
+                    sprintf('Tickets desde %s hasta %s de Peluqueria Carmen', $start_date, $end_date),
                     $this->getPrintVersion($app, $report, $start_date, $end_date, $shop),
                     $headers
             );
