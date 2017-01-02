@@ -131,7 +131,7 @@ namespace Controller
 
                 $emailSent = mail(
                     $email,
-                    sprintf('Tickets desde %s hasta %s de %s', $start_date, $end_date, $shop['name']),
+                    sprintf('Tickets desde %s hasta %s', $start_date, $end_date),
                     $this->getPrintVersion($app, $report, $start_date, $end_date, $shop),
                     $headers
             );
