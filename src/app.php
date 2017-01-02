@@ -59,11 +59,11 @@ $app['translator'] = $app->share($app->extend('translator', function($translator
 }));
 
 // Log definition.
-$app->register(new MonologServiceProvider(), array(
-	'monolog.logfile' => PATH_LOG . '/app.log',
-	'monolog.name'	=> 'app',
-	'monolog.level'   => 300 // = Logger::WARNING
-));
+//$app->register(new MonologServiceProvider(), array(
+//	'monolog.logfile' => PATH_LOG . '/app.log',
+//	'monolog.name'	=> 'app',
+//	'monolog.level'   => 300 // = Logger::WARNING
+//));
 
 // Template system definition.
 $app->register(new TwigServiceProvider(), array(
