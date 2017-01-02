@@ -125,7 +125,7 @@ namespace Controller
             else if( 'email' == $version )
             {
                 $email = $app['request']->get( 'email' );
-                $headers = "From: " . strip_tags(shop['email']) . "\r\n";
+                $headers = "From: " . strip_tags($shop['email']) . "\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
                 $emailSent = mail(
