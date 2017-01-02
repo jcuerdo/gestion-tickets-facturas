@@ -55,10 +55,11 @@ SELECT
 FROM
 	`ticket`
 WHERE
-	`date` = ?
+	date(`date`) = ?
 SQL;
 
-			$stmt = $this->db->executeQuery( $sql, array( $date ) );
+
+			$stmt = $this->db->executeQuery( $sql, array( date('Y-d-m', strtotime($date)) ) );
 
 			if ( !$tickets = $stmt->fetchAll() )
 			{

@@ -131,7 +131,7 @@ namespace Controller
                 $subject = '=?UTF-8?B?'.base64_encode($subject).'?=';
 
 
-                $headers = "From: <info@peluqueria-carmen.es>\r\n";
+                $headers = "From:". strip_tags($shop['email']) ."\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8\r\n";
 
