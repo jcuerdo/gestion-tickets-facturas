@@ -92,7 +92,9 @@ SQL;
 			}
 
 			foreach ( $services as $key => $value) {
-				$services[$key]['price'] = $value['base_price'] * ( ( $this->app['iva'] / 100 ) + 1 );
+			    $iva = isset($value['iva_applied']) ? $value['iva_applied'] : $this->app['iva'];
+			    $price = isset($value['base_price_applied']) ? $value['base_price_applied'] : $value['base_price'];
+				$services[$key]['price'] = $price * ( ( $iva / 100 ) + 1 );
 			}
 
 			return $services;
@@ -100,14 +102,21 @@ SQL;
 
 		public function createTicketService( $id_ticket, $id_service )
 		{
+		    $serviceModel = new ServiceModel($this->app);
+
+		    $service = $serviceModel->getService($id_service);
+
+            $basePrice = $service['base_price'];
+            $iva = isset($service['iva']) ? $service['iva'] : $this->app['iva'];
+
 			$sql = <<<SQL
 INSERT INTO
 	`ticket_service` 
-	( `id_ticket`, `id_service` )
+	( `id_ticket`, `id_service`,`base_price_applied`,`iva_applied`)
 	VALUES 
-	( ?, ? )
+	( ?, ? ,? ,?)
 SQL;
-			$stmt = $this->db->executeQuery( $sql, array( $id_ticket, $id_service ) );
+			$stmt = $this->db->executeQuery( $sql, array( $id_ticket, $id_service, $basePrice, $iva) );
 			if ( !$this->db->lastInsertId() )
 			{
 				throw new Exception( sprintf( 'Service not created' ) );
@@ -155,7 +164,9 @@ SELECT
 	t.date,
 	t.id_ticket,
 	s.name,
-	s.base_price
+	s.base_price,
+	ts.base_price_applied,
+	ts.iva_applied
 FROM
 	`service` s
 	INNER JOIN `ticket_service` ts
@@ -179,15 +190,26 @@ SQL;
 			}
 
 			$base_total = 0;
+			$price_total = 0;
 			foreach( $services as $service )
 			{
-				$base_total += $service['base_price']; 
-				$service['price'] = $service['base_price'] * ( ( $iva / 100 ) + 1 ); 
-			    $report['tickets'][$service['id_ticket']]['services'][] = $service;
+                $iva = isset($service['iva_applied']) ? $service['iva_applied'] : $iva;
+                $basePrice = isset($service['base_price_applied']) ? $service['base_price_applied'] : $service['base_price'];
+                $price = $basePrice * ( ( $iva / 100 ) + 1);
+
+                $base_total += $basePrice;
+                $price_total += $price;
+
+				$service['price'] = $price;
+				$service['base_price'] = $basePrice;
+				$service['iva'] = $iva;
+
+				$report['tickets'][$service['id_ticket']]['services'][] = $service;
 			    $report['tickets'][$service['id_ticket']]['date'] = $service['date'];
 			}
 				$report['base_total'] = $base_total;
 				$report['total'] = $base_total * ( ( $iva / 100 ) + 1 );
+
 			return $report;
 		}
 }
