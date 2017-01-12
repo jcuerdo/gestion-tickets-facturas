@@ -1,7 +1,7 @@
-log/*
 vendor/*
 public/assets/*
 nbproject/*
 composer.phar
 composer.lock
 cache
+log/app.log
