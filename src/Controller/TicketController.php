@@ -143,7 +143,7 @@ namespace Controller
 
                 $mail = new PHPMailer();
                 $mail->isSMTP();
-                $mail->SMTPDebug = 2;
+                //$mail->SMTPDebug = 2;
                 $mail->Host = 'smtp.gmail.com';
                 $mail->Port = 587;
                 $mail->SMTPSecure = 'tls';
@@ -158,12 +158,14 @@ namespace Controller
                 $mail->msgHTML($this->getPrintVersion($app, $report, $start_date, $end_date, $shop));
 
 
+                /**
                 $emailSent = mail(
                     $email,
                     $subject,
                     $this->getPrintVersion($app, $report, $start_date, $end_date, $shop),
-                    $headers
-            );
+                    $headers)
+                ;
+                 */
                 if($mail->send()){
                     $app['session']->getFlashBag()->add('success', "Se ha enviado correctamente el reporte a $email.");
                 }else{
