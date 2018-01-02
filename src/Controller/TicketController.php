@@ -130,10 +130,16 @@ namespace Controller
                 $subject = sprintf("Tickets desde %s hasta %s de %s", $start_date, $end_date, $shop['name']);
                 $subject = '=?UTF-8?B?'.base64_encode($subject).'?=';
 
-
                 $headers = "From:". strip_tags($shop['email']) ."\r\n";
+                $headers .= "Organization: ". strip_tags($shop['name']) ."\r\n";
+                $headers .= "Reply-To: ". strip_tags($shop['email']) ."\r\n";
+                $headers .= "Return-Path: ". strip_tags($shop['email']) ."\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8\r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "X-Priority: 1\r\n";
+                $headers .= "X-Mailer: PHP". phpversion() ."\r\n" ;
+
 
                 $emailSent = mail(
                     $email,
