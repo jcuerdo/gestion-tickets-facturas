@@ -161,9 +161,9 @@ namespace Controller
                     $headers
             );
                 if($mail->send()){
-                    $app['session']->getFlashBag()->add('success', "Se ha enviado correctamente el reporte a $email. " + $mail->ErrorInfo );
+                    $app['session']->getFlashBag()->add('success', "Se ha enviado correctamente el reporte a $email.");
                 }else{
-                    $app['session']->getFlashBag()->add('error', "No se ha podido enviar el reporte a $email");
+                    $app['session']->getFlashBag()->add('error', "No se ha podido enviar el reporte a $email. "  + $mail->ErrorInfo);
                 }
 
 
