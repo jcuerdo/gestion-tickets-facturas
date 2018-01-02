@@ -147,10 +147,11 @@ namespace Controller
                 $mail->Port = 587;
                 $mail->SMTPSecure = 'tls';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'carmenalvarezparrondo@gmail.com';
-                $mail->Password = 'purpura66';
+                $mail->Username = $shop['email'];
+                $mail->Password = $shop['password'];
                 $mail->addAddress($email);
                 $mail->Subject = $subject;
+                $mail->From = $shop['email'];
                 $mail->msgHTML($this->getPrintVersion($app, $report, $start_date, $end_date, $shop));
 
 
