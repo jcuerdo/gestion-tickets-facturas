@@ -6,6 +6,7 @@ namespace Controller
 	use Model\TicketModel;
 	use Model\ServiceModel;
 	use Model\ShopModel;
+	use PHPMailer\PHPMailer\PHPMailer;
 
 	class TicketController implements ControllerProviderInterface
 	{
@@ -140,6 +141,18 @@ namespace Controller
                 $headers .= "X-Priority: 1\r\n";
                 $headers .= "X-Mailer: PHP". phpversion() ."\r\n" ;
 
+                $mail = new PHPMailer();
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Port = 587;
+                $mail->SMTPSecure = 'tls';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'carmenalvarezparrondo@gmail.com';
+                $mail->Password = 'purpura66';
+                $mail->addAddress($email);
+                $mail->Subject = $subject;
+                $mail->msgHTML($this->getPrintVersion($app, $report, $start_date, $end_date, $shop));
+                
 
                 $emailSent = mail(
                     $email,
@@ -147,7 +160,7 @@ namespace Controller
                     $this->getPrintVersion($app, $report, $start_date, $end_date, $shop),
                     $headers
             );
-                if($emailSent){
+                if($mail->send()){
                     $app['session']->getFlashBag()->add('success', "Se ha enviado correctamente el reporte a $email");
                 }else{
                     $app['session']->getFlashBag()->add('error', "No se ha podido enviar el reporte a $email");
