@@ -19,7 +19,7 @@
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
   <!-- Custom styles for this template -->
-  <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	{% block header %}
 	{% endblock %}
