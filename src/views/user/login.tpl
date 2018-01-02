@@ -54,7 +54,7 @@
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
   <!-- Custom styles for this template -->
-  <link href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://raw.githubusercontent.com/twbs/bootstrap/master/docs/examples/dashboard/dashboard.css" rel="stylesheet">
   </head>
 
   <body>
