@@ -143,6 +143,7 @@ namespace Controller
 
                 $mail = new PHPMailer();
                 $mail->isSMTP();
+                $mail->SMTPDebug = 2;
                 $mail->Host = 'smtp.gmail.com';
                 $mail->Port = 587;
                 $mail->SMTPSecure = 'tls';
@@ -150,6 +151,8 @@ namespace Controller
                 $mail->Username = $shop['email'];
                 $mail->Password = $shop['password'];
                 $mail->addAddress($email);
+                $mail->addReplyTo($shop['email']);
+                $mail->setFrom($shop['email']);
                 $mail->Subject = $subject;
                 $mail->From = $shop['email'];
                 $mail->msgHTML($this->getPrintVersion($app, $report, $start_date, $end_date, $shop));
