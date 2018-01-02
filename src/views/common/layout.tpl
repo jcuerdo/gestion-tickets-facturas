@@ -62,16 +62,7 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-	        <li {% if 'homepage' == active %}class="active"{% endif %}><a href="{{ path('homepage') }}">Inicio</a></li>
-			</li>
-			<li {% if 'ticket_add' == active %}class="active"{% endif %}><a href="{{ path('ticket_add') }}">Nuevo ticket</a></li>
-			<li {% if 'tickets_show' == active %}class="active"{% endif %}><a href="{{ path('tickets_show') }}">Ver Tickets</a></li>
-			<li {% if 'tickets_report' == active %}class="active"{% endif %}><a href="{{ path('tickets_report') }}">Generar facturas</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-12 col-md-12  main"><br/>
           <h1 class="page-header">Gestión de Tickets</h1>
 
           <div class="row placeholders">
