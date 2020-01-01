@@ -7,7 +7,7 @@
     $(document).ready(function(){
       $('#service_price').keyup (function(){
         var service_price = parseFloat($('#service_price').val());
-        var service_base_price = (service_price / (1 + {{app.iva}} / 100)  ).toFixed(2)
+        var service_base_price = (service_price / (1 + {{app.iva}} / 100)  )
         $('#service_base_price').val(service_base_price);
 
     });
