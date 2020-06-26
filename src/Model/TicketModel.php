@@ -59,7 +59,7 @@ WHERE
 SQL;
 
 
-			$stmt = $this->db->executeQuery( $sql, array( date('Y-d-m', strtotime($date)) ) );
+			$stmt = $this->db->executeQuery( $sql, array( date('Y-m-d', strtotime($date)) ) );
 
 			if ( !$tickets = $stmt->fetchAll() )
 			{

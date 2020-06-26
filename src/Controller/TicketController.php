@@ -59,10 +59,10 @@ namespace Controller
 		public function showAll( Application $app )
 		{
 			$ticket_model =  new TicketModel( $app );
-			$date = $app['request']->get( 'date' );
-			$date = $date != null ? $date : date('d-m-Y');
+            $date = $app['request']->get( 'date' );
+			$date = $date != null ? $date : date('Y-m-d');
 			$timestamp = strtotime( $date );
-			$date = date("Y-m-d", $timestamp);
+            $date = date("Y-m-d", $timestamp);
 			$tickets = $ticket_model->getTicketsByDate( $date );
 
 			return $app['twig']->render( 'ticket/tickets.tpl', array( 'tickets' => $tickets, 'date' => $date ) );
