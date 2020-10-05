@@ -140,16 +140,16 @@ namespace Controller
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "X-Priority: 1\r\n";
                 $headers .= "X-Mailer: PHP". phpversion() ."\r\n" ;
-
+		    
                 $mail = new PHPMailer();
                 $mail->isSMTP();
                 //$mail->SMTPDebug = 2;
-                $mail->Host = 'smtp.gmail.com';
+                $mail->Host = 'smtp-relay.sendinblue.com';
                 $mail->Port = 587;
                 $mail->SMTPSecure = 'tls';
                 $mail->SMTPAuth = true;
-                $mail->Username = $shop['email'];
-                $mail->Password = $shop['password'];
+                $mail->Username = 'jocual@gmail.com';
+                $mail->Password = 'xsmtpsib-8759df97dc876ed6198cbbf049987e687e9b295b7b050940f6f848fc6bd773a7-WF62QUgAJNHtP7pE';
                 $mail->addAddress($email);
                 $mail->addReplyTo($shop['email']);
                 $mail->setFrom($shop['email']);
