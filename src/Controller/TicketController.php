@@ -144,12 +144,12 @@ namespace Controller
                 $mail = new PHPMailer();
                 $mail->isSMTP();
                 //$mail->SMTPDebug = 2;
-                $mail->Host = 'smtp-relay.sendinblue.com';
+                $mail->Host = $shop['smtp_host'];
                 $mail->Port = 587;
                 $mail->SMTPSecure = 'tls';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'jocual@gmail.com';
-                $mail->Password = 'xsmtpsib-8759df97dc876ed6198cbbf049987e687e9b295b7b050940f6f848fc6bd773a7-WF62QUgAJNHtP7pE';
+                $mail->Username = $shop['smtp_email'];
+                $mail->Password = $shop['smtp_password'];
                 $mail->addAddress($email);
                 $mail->addReplyTo($shop['email']);
                 $mail->setFrom($shop['email']);
