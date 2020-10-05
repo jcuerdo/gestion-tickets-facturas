@@ -20,9 +20,9 @@
       <tr>
         <td>{{ service.date | date("d/m/Y") }}</td>
         <td>{{ service.name }}</td>
-        <td>{{ service.base_price | number_format( 2, ',', '.' ) }}€</td>
+        <td>{{ service.base_price | number_format( 2, ',', '.' ) }}&euro;</td>
         <td>{{ service.iva }}%</td>
-        <td>{{ service.price | number_format( 2, ',', '.' ) }}€</td>
+        <td>{{ service.price | number_format( 2, ',', '.' ) }}&euro;</td>
       </tr>
     {% endfor %}
   </tbody>
@@ -33,14 +33,14 @@
   <div class="col-md-6">
     <div class="panel panel-default">
     <div class="panel-body">
-          <strong>Precio base total:</strong> {{report.base_total | number_format( 2, ',', '.' ) }}€
+          <strong>Precio base total:</strong> {{report.base_total | number_format( 2, ',', '.' ) }}&euro;
   </div>
 </div>
   </div>
   <div class="col-md-6">
         <div class="panel panel-default">
     <div class="panel-body">
-          <strong>Precio total:</strong> {{report.total | number_format( 2, ',', '.' ) }}€
+          <strong>Precio total:</strong> {{report.total | number_format( 2, ',', '.' ) }}&euro;
   </div>
 </div>
   </div>
