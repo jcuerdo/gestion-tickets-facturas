@@ -148,7 +148,7 @@ namespace Controller
                 $mail->Port = 587;
                 $mail->SMTPSecure = 'tls';
                 $mail->SMTPAuth = true;
-                $mail->Username = $shop['smtp_email'];
+                $mail->Username = $shop['smtp_user'];
                 $mail->Password = $shop['smtp_password'];
                 $mail->addAddress($email);
                 $mail->addReplyTo($shop['email']);
