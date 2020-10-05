@@ -155,8 +155,7 @@ namespace Controller
                 $mail->setFrom($shop['email']);
                 $mail->Subject = $subject;
                 $mail->From = $shop['email'];
-                $mail->msgHTML($this->getPrintVersion($app, $report, $start_date, $end_date, $shop));
-
+                $mail->msgHTML(utf8_decode($this->getPrintVersion($app, $report, $start_date, $end_date, $shop)));
 
                 /**
                 $emailSent = mail(
